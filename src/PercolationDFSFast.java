@@ -9,12 +9,30 @@ public class PercolationDFSFast extends PercolationDFS{
 	
 	@Override
 	public void updateOnOpen(int row, int col) {
+		boolean check = false; 
+		
 		if (row == 0) {
-			dfs(row,col);
+			check = true;
 		}
 		
-		if (myGrid[row][col+1] == FULL || myGrid[row +1][col] == FULL || myGrid[row-1][col] == FULL || myGrid[row][col-1] == FULL) {
-			dfs(row,col);
+		if (inBounds(row,col+1) && myGrid[row][col+1] == FULL) {
+			check = true;
 		}
+		
+		if (inBounds(row,col-1) && myGrid[row][col-1] == FULL) {
+			check = true;
+		}
+		
+		if (inBounds(row+1,col) && myGrid[row+1][col] == FULL) {
+			check = true;
+		}
+		
+		if (inBounds(row-1,col) && myGrid[row-1][col] == FULL) {
+			check = true;
+		}
+	
+		if (check) dfs(row,col);
+	
+	    
 	}
 }
