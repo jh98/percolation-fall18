@@ -8,21 +8,13 @@ public class PercolationBFS extends PercolationDFSFast {
 		super(n);
 	}
 	
-	//public int getIndex(int row, int col, int size) {
-	//	return row * size + col;
-	//}
 	
 	@Override
-	public void dfs(int row, int col) {
-		
-		//row and col in bound
-		//convert row + col > one single value before putting it into the queue
-		//while 
-		
+	protected void dfs(int row, int col) {
 		
 		Queue<Integer> q = new LinkedList<>();
-		myGrid[row][col] = FULL; //cell is FULL
-		q.add(row*myGrid.length + col); //put the cell on queue
+		myGrid[row][col] = FULL; 
+		q.add(row*myGrid.length + col); 
 		
 		while (q.size() > 0) {
 			int temp = q.remove();

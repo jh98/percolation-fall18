@@ -9,6 +9,7 @@ public class PercolationDFSFast extends PercolationDFS{
 	
 	@Override
 	public void updateOnOpen(int row, int col) {
+		
 		boolean check = false; 
 		
 		if (row == 0) {
@@ -32,7 +33,6 @@ public class PercolationDFSFast extends PercolationDFS{
 		}
 	
 		if (check) dfs(row,col);
-	
 	    
 	}
 }
