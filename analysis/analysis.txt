@@ -1,22 +1,99 @@
-Your name
-Your netid
-
-Copy/Paste results from PercolationStats using PercolationDFS
-
+>Jai Eun Huh
+>jh510
 
 Copy/Paste results from PercolationStats using PercolationDFSFast
 
+grid	mean	stddev	time
+100	    0.593	0.014	0.100
+200	    0.591	0.010	0.231
+400	    0.590	0.006	0.768
+800	    0.594	0.004	4.806
+
+StackOverFlowError occurs for grid of size 1600 and 3200.
 
 Copy/Paste results from PercolationStats using PercolationBFS
+
+grid	mean	stddev	time
+100	    0.593	0.014	0.150
+200	    0.591	0.010	0.197
+400	    0.590	0.006	0.898
+800	    0.594	0.004	4.890
+1600	0.592	0.002	27.167
+3200	0.593	0.001	196.435
 
 
 Copy/Paste results from PercolationStats using PercolationUF 
 with the QuickUWPC UnionFind implementation.
 
+grid	mean	stddev	time
+100	    0.593	0.014	0.082
+200	    0.591	0.010	0.135
+400	    0.590	0.006	0.748
+800	    0.594	0.004	3.677
+1600	0.592	0.002	19.965
+3200	0.593	0.001	109.957
+
+
 1. How does doubling the grid size affect running time (keeping # trials fixed)
+
+When grid size is doubled, PercolationBFS runtime increased by the factor of 6 roughly (table above). 
+When grid size is doubled, PercolationUF runtime increased by the factor of 5 roughly (table above). 
+It is unclear how doubling the grid size will influence the runtime of PercolationDFSFast as StackOverFlowError occurs.
+DFSFast uses recursion to implement, and having grid of size = 1600, results in recursion calls to 2,560,000 cells.
+However, I predict that doubling the grid size will increase the runtime of PercolationDFSFast by the factor similar to that of PercolationBFS or larger.
 
 
 2. How does doubling the number of trials affect running time.
 
+Grid size = 400 
+
+PercolationUF
+trial   mean    stdev   time
+2	    0.593	0.008	0.110
+4	    0.595	0.004	0.249
+8	    0.596	0.006	0.253
+16	    0.591	0.008	0.548
+32      0.592	0.006	0.939
+
+PercolationBFS
+trial   mean    stdev   time
+2	    0.593	0.008	0.148
+4	    0.595	0.004	0.232
+8	    0.596	0.006	0.329
+16	    0.591	0.008	0.590
+32 	    0.592	0.006	1.029
+
+PercolationDFSFast
+trial   mean    stdev   time
+2   	0.593	0.008	0.148
+4    	0.595	0.004	0.250
+8    	0.596	0.006	0.266
+16   	0.591	0.008	0.592
+32   	0.592	0.006	1.011
+64      0.593	0.006	1.967
+
+We saw that as the number of trials doubled, the runtime also doubled for each Percolation implementations.
+There seems to be a linear relationship between the number of trials and average runtime.
 
 3. Estimate the largest grid size you can run in 24 hours with 20 trials. Explain your reasoning.
+
+In a day, there are 83,400 seconds.
+
+PercolationUF: 
+Runtime is scaled roughly 5 times each time the size is doubled. 
+109.957 * 5^n = 83400 (from line 34) 
+3200 * 2^n = ? 
+
+n = 4.1202679870277
+? = 55651.1614523162493216
+
+PercolationBFS:
+Runtime is scaled roughly 6 times each time the size is doubled. 
+196.435 * 6^n = 83400 (from line 22)
+3200 * 2^n = ? 
+
+n = 3.7597423914878
+? = 43345.6194814813742912
+
+
+
