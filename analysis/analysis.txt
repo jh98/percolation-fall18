@@ -38,9 +38,9 @@ grid	mean	stddev	time
 
 When grid size is doubled, PercolationBFS runtime increased by the factor of 6 roughly (table above). 
 When grid size is doubled, PercolationUF runtime increased by the factor of 5 roughly (table above). 
-It is unclear how doubling the grid size will influence the runtime of PercolationDFSFast as StackOverFlowError occurs.
-DFSFast uses recursion to implement, and having grid of size = 1600, results in recursion calls to 2,560,000 cells.
-However, I predict that doubling the grid size will increase the runtime of PercolationDFSFast by the factor similar to that of PercolationBFS or larger.
+It is unclear how doubling the grid size will influence the runtime of PercolationDFSFast (StacksOverFlowError).
+DFSFast uses recursion to implement, and having grid of size = 1600 results in recursion calls of 2,560,000 cells.
+I predict doubling the grid size will increase the runtime of PercolationDFSFast by the factor similar to that of PercolationBFS or larger.
 
 
 2. How does doubling the number of trials affect running time.
@@ -72,7 +72,7 @@ trial   mean    stdev   time
 32   	0.592	0.006	1.011
 64      0.593	0.006	1.967
 
-We saw that as the number of trials doubled, the runtime also doubled for each Percolation implementations.
+We saw that as the number of trials doubled, the runtime also doubled for every Percolation implementations.
 There seems to be a linear relationship between the number of trials and average runtime.
 
 3. Estimate the largest grid size you can run in 24 hours with 20 trials. Explain your reasoning.
@@ -87,6 +87,8 @@ Runtime is scaled roughly 5 times each time the size is doubled.
 n = 4.1202679870277
 ? = 55651.1614523162493216
 
+The largest grid size for PercolationUF will be 55651.
+
 PercolationBFS:
 Runtime is scaled roughly 6 times each time the size is doubled. 
 196.435 * 6^n = 83400 (from line 22)
@@ -94,6 +96,8 @@ Runtime is scaled roughly 6 times each time the size is doubled.
 
 n = 3.7597423914878
 ? = 43345.6194814813742912
+
+The largest grid size for PercolationBFS will be 43345. 
 
 
 
